@@ -7,17 +7,17 @@ schedule:
   send_minute: 0
 
 email:
-  to: "3212923163@qq.com"   # ← 改成你的收件邮箱
+  to: "3212923163@qq.com"   # 收件邮箱（自己发给自己，也可填别的）
   from_name: "AI 每日简报"
-  provider: "resend"        # resend（需域名，送达稳）| smtp（Gmail 零成本备选）
+  provider: "smtp"          # smtp（QQ 邮箱零成本方案）| resend（需域名，送达稳）
   # —— Resend（provider=resend 时生效）——
   resend_api_key: ""        # 从环境变量 RESEND_API_KEY 读取
-  resend_from: "ai-news@yourdomain.com"   # ← 改成你的域名邮箱，如 news@xxx.com
-  # —— Gmail SMTP（provider=smtp 时生效，零成本备选）——
-  smtp_host: "smtp.gmail.com"
-  smtp_port: 587
-  smtp_user: ""             # 从环境变量 SMTP_USER 读取
-  smtp_pass: ""             # 从环境变量 SMTP_PASS 读取（Gmail 应用专用密码）
+  resend_from: "ai-news@yourdomain.com"   # 用 resend 时才需要
+  # —— QQ 邮箱 SMTP（provider=smtp 时生效，零成本）——
+  smtp_host: "smtp.qq.com"
+  smtp_port: 587            # QQ 邮箱用 587(STARTTLS)；不要用 465(隐式SSL会报错)
+  smtp_user: ""             # 从环境变量 SMTP_USER 读取（你的完整 QQ 邮箱）
+  smtp_pass: ""             # 从环境变量 SMTP_PASS 读取（QQ 邮箱「授权码」，非登录密码）
 
 llm:
   enabled: true

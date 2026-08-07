@@ -6,6 +6,7 @@ provider 在 config.yaml 的 email.provider 切换；密钥只从环境变量读
 import smtplib
 import ssl
 from email.mime.text import MIMEText
+from email.utils import formataddr
 
 import requests
 
