@@ -1,0 +1,6 @@
+# 密钥与本地产物
+.env
+preview.html
+__pycache__/
+*.pyc
+.DS_Store
