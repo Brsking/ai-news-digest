@@ -4,7 +4,7 @@
 schedule:
   timezone_offset: 8        # 时区偏移（中国 = UTC+8）
   send_hour: 8              # 每天本地 8 点发送（改这里即可改时间，不用动 workflow）
-  send_minute: 0
+  send_window_hours: 2      # 发送窗口：send_hour 起几小时内允许发，防 GitHub 调度延迟
 
 email:
   to: "3212923163@qq.com"   # 收件邮箱（自己发给自己，也可填别的）

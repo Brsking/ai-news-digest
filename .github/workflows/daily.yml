@@ -1,9 +1,10 @@
 name: 每日 AI 新闻邮件推送
 
 on:
-  # 每小时触发一次；脚本内部判断"是否到设定发送时点"，只有到点才真正发信。
+  # GitHub 免费版 schedule 不稳定，改为每15分钟巡检一次；脚本内部用 .sent_lock
+  # 保证每天在北京时间 send_hour 起的窗口内只发一封。
   schedule:
-    - cron: "0 * * * *"
+    - cron: "*/15 * * * *"
   # 允许在 GitHub Actions 页面手动点 Run workflow 立即触发（忽略时间检查）。
   workflow_dispatch:
 
@@ -13,6 +14,17 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+
+      - name: 获取今日日期
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: 恢复今日发送锁
+        uses: actions/cache@v4
+        with:
+          path: .sent_lock
+          key: sent-${{ steps.date.outputs.today }}
+          # 不设置 restore-keys，避免恢复到昨天的锁导致今天漏发
 
       - name: 设置 Python
         uses: actions/setup-python@v5
